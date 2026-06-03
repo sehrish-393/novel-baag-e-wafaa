@@ -15,8 +15,8 @@ https://sehrish-393.github.io/novel-baag-e-wafaa/
 ## 📚 Episodes
 
 - Episode 1 ✅
-- Episode 2 (Coming Soon)
-
+- Episode 2 ✅
+Episode 3 coming soon
 ## 💌 Message from the Author
 
 اگر آپ کو "باغِ وفا" پسند آئے تو براہِ کرم اس کا لنک اپنے دوستوں کے ساتھ شیئر کریں۔

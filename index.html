@@ -1,1 +1,263 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>قسط ۱ — باغِ وفا</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --paper:#fdf6ec;--paper2:#f5ead6;--ink:#1c0f05;
+      --ink-mid:#3b2010;--ink-light:#6b4226;
+      --accent:#8b1a1a;--gold:#b8860b;--border:rgba(139,90,43,.22);
+    }
+    html{scroll-behavior:smooth}
+    body{background:#e8d9c4;font-family:'Noto Nastaliq Urdu',serif;color:var(--ink);min-height:100vh}
 
+    /* ── 3-BUTTON NAV ── */
+    .reader-nav{
+      position:sticky;top:0;z-index:100;
+      background:rgba(232,217,196,.96);backdrop-filter:blur(8px);
+      border-bottom:1px solid var(--border);
+      display:flex;align-items:center;justify-content:space-between;
+      padding:.6rem 1.2rem;gap:.5rem;
+    }
+    .nav-btn{
+      display:inline-flex;align-items:center;gap:.3rem;
+      padding:.5rem 1.1rem;border-radius:5px;
+      font-family:'Playfair Display',serif;font-style:italic;font-size:.82rem;
+      text-decoration:none;direction:ltr;white-space:nowrap;
+      transition:background .2s,color .2s;border:1px solid;
+    }
+    .nav-prev{background:var(--paper);color:var(--ink-light);border-color:var(--border)}
+    .nav-prev:hover{background:var(--paper2)}
+    .nav-prev.disabled{opacity:.35;pointer-events:none}
+
+    .nav-home{
+      background:var(--accent);color:#fdf6ec;border-color:var(--accent);
+      padding:.5rem 1.3rem;font-size:.85rem;
+    }
+    .nav-home:hover{background:#6e1212}
+
+    .nav-next{background:var(--paper);color:var(--ink-light);border-color:var(--border)}
+    .nav-next:hover{background:var(--paper2)}
+
+    /* ── BOOK HEADER ── */
+    .book-head{text-align:center;padding:2rem 1.5rem 1rem}
+    .ep-eyebrow{font-family:'Playfair Display',serif;font-size:.72rem;letter-spacing:.18em;color:var(--ink-light);direction:ltr;text-transform:uppercase;margin-bottom:.3rem}
+    .ep-title-ur{font-size:1.5rem;font-weight:600;color:var(--ink-mid)}
+
+    .divider{width:70px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:1.2rem auto 1.5rem;position:relative}
+    .divider span{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#e8d9c4;padding:0 6px;font-size:.85rem}
+
+    /* font controls */
+    .font-ctrl{display:flex;justify-content:flex-end;align-items:center;gap:.4rem;max-width:700px;margin:0 auto;padding:0 1.5rem .5rem}
+    .fc-label{font-family:'Playfair Display',serif;font-size:.72rem;color:var(--ink-light);font-style:italic}
+    .fc-btn{background:var(--paper);border:1px solid var(--border);color:var(--ink-mid);width:28px;height:28px;border-radius:4px;cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center;transition:background .15s}
+    .fc-btn:hover{background:var(--paper2)}
+
+    /* ── PAGE ── */
+    .page-wrap{max-width:700px;margin:0 auto;padding:0 1.2rem 2rem}
+    .page{
+      background:var(--paper);border-radius:3px;border-top:3px solid var(--gold);
+      padding:clamp(1.8rem,5vw,3.5rem) clamp(1.4rem,6vw,4.5rem);
+      box-shadow:0 12px 48px rgba(60,20,0,.12),2px 0 8px -3px rgba(60,20,0,.1),-2px 0 8px -3px rgba(60,20,0,.1);
+      position:relative;
+    }
+    .page::before{
+      content:'';position:absolute;inset:0;border-radius:3px;
+      background-image:repeating-linear-gradient(transparent,transparent 37px,rgba(139,90,43,.055) 37px,rgba(139,90,43,.055) 38px);
+      pointer-events:none;
+    }
+    .page::after{
+      content:'';position:absolute;top:0;bottom:0;
+      left:clamp(.8rem,4.5vw,2.8rem);width:1px;
+      background:rgba(210,100,100,.18);pointer-events:none;
+    }
+
+    /* ── PROSE ── */
+    .prose{position:relative;z-index:1;font-size:1.08rem;line-height:2.45;color:var(--ink);text-align:justify}
+    .prose p{margin-bottom:1.5em;text-indent:2em}
+    .prose p.first-p{text-indent:0}
+    .prose p.first-p::first-letter{float:right;font-size:3.6em;line-height:.75;margin-left:.1em;color:var(--accent);font-weight:700}
+    .prose p.dlg{text-indent:0;padding-right:1em;border-right:3px solid rgba(139,26,26,.22);color:var(--ink-mid)}
+    .scene{text-align:center;color:var(--gold);letter-spacing:.35em;margin:1.8rem 0;position:relative;z-index:1;font-size:1rem}
+
+    .opening-quote{
+      border-right:4px solid var(--gold);padding:.7rem 1.1rem .7rem 0;
+      margin-bottom:2rem;color:var(--ink-mid);font-size:1rem;
+      font-style:italic;line-height:2.1;position:relative;z-index:1;
+    }
+
+    .page-num{text-align:center;font-family:'Playfair Display',serif;font-style:italic;font-size:.75rem;color:var(--ink-light);margin-top:2rem;position:relative;z-index:1;direction:ltr}
+    .page-num::before,.page-num::after{content:'— '}
+
+    /* ── BOTTOM NAV ── */
+    .bottom-nav{
+      max-width:700px;margin:1.5rem auto 4rem;padding:0 1.2rem;
+      display:flex;align-items:center;justify-content:space-between;gap:.5rem;
+    }
+
+    @media(max-width:480px){
+      .page{padding:1.6rem 1.1rem}
+      .prose{font-size:1rem;line-height:2.2}
+      .nav-btn{padding:.45rem .8rem;font-size:.76rem}
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP 3-BUTTON NAV -->
+<nav class="reader-nav">
+  <a class="nav-btn nav-prev disabled" href="#">← پچھلی</a>
+  <a class="nav-btn nav-home" href="episodes.html">🌹 اقساط</a>
+  <a class="nav-btn nav-next" href="episode2.html">اگلی →</a>
+</nav>
+
+<!-- Header -->
+<div class="book-head">
+  <div class="ep-eyebrow">Episode One</div>
+  <div class="ep-title-ur">پہلی قسط</div>
+  <div class="divider"><span>🌹</span></div>
+</div>
+
+<!-- Font controls -->
+<div class="font-ctrl">
+  <span class="fc-label">Font:</span>
+  <button class="fc-btn" onclick="cf(-1)">A−</button>
+  <button class="fc-btn" onclick="cf(1)">A+</button>
+</div>
+
+<!-- Book page -->
+<div class="page-wrap">
+<div class="page">
+  <div class="opening-quote">
+    کیا قربانی محبت سے بڑی ہوتی ہے؟<br/>
+    کیا محبت ہمیشہ قربانی مانگتی ہے؟ یا کبھی محبت خود قربانی دے جاتی ہے؟<br/>
+    یہی سوالات آپ کو باغِ وفا کے ہر صفحے پر سوچنے پر مجبور کریں گے۔
+  </div>
+
+  <div class="prose" id="prose">
+
+    <p class="first-p">وہ رائل بلیو کلر کا گائون پہن کر شیشے کے آگے کھڑی تھی۔ اس نے ڈریس کے ساتھ کا ایک خوبصورت حجاب لیا تھا۔ گھر والوں سے جھوٹ بول کر کسی سے ملنے جانا اس کے لیے اذیت کا سبب بن رہا تھا۔ لیکن وہ ذلت کو گھر آنے سے پہلے خیر باد کہنا چاہتی تھی۔ وہ اپنے والدین کا سر شرم سے جھکانا نہیں چاہتی تھی۔</p>
+
+    <p>اگر اس ایک خفیہ ملاقات سے اس کے بھائیوں کا غرور قائم رہ سکتا تھا تو وہ اس سے ملنے ضرور جائے گی۔ گاڑی کا ہارن سنتے ہی اس کے دل کی دھڑکن تیز ہوئی۔ وہ اڑتی رنگت کے ساتھ دہلیز پار کر چکی تھی۔ گاڑی میں اس کی دوست اس کا انتظار کر رہی تھی۔</p>
+
+    <p class="dlg">"اس کے گھر جانے سے پہلے ایک بار اچھی طرح سوچ لو۔ تم اور میں اس کے کردار سے اچھی طرح واقف ہیں۔ ایسے میں اس سے تنہائی میں ملنا عقل مندی نہیں ہے۔"</p>
+
+    <p class="dlg">"جو بھی ہو مجھے اس سے آخری ملاقات کرنی ہے۔ آج میں اس چیپٹر کو بند کر دینا چاہتی ہوں۔ اگر میں نے آج اس سے ملاقات نہ کی تو بابا جانی کی عزت پر حرف آ سکتا ہے اور میں ان کا وہ مان نہیں توڑ سکتی جو وہ مجھ پر کرتے ہیں۔"</p>
+
+    <p>گاڑی ڈیفنس پہنچ چکی تھی۔ اس کا دل تیزی سے دھڑکنے لگا تھا۔ یہ اس کے گھر میں پہلی ملاقات تھی۔ وہ یہ بھی جانتی تھی کہ اس کی فیملی ملک سے باہر گئی ہوئی ہے۔ حریم کا نمبر دیکھتے ہی کبیر مسکرانے لگا تھا — آخر وہ لمحہ آ چکا تھا جس کا وہ شدت سے انتظار کر رہا تھا۔</p>
+
+    <p>اس کا گھر کافی بڑا تھا۔ لیکن نہ ہی گیٹ پر کوئی چوکیدار تھا، نہ ہی کوئی ملازم نظر آ رہا تھا۔ وہ بس یہی سوچ رہی تھی کہ آ کر کوئی غلطی تو نہیں کی۔ وہ مسکراتے ہوئے اسے لان کی طرف لے جا رہا تھا۔ اس نے حریم کے آنے کی خوشی میں لان کو خوبصورت انداز سے سجایا تھا — ایک فائیو سٹار ہوٹل سے بھی بڑھ کر شاندار۔</p>
+
+    <p class="dlg">"یہ سارا کھانا میں نے اپنے ہاتھوں سے بنایا ہے۔"</p>
+
+    <p class="dlg">"میں تم سے کچھ کہنا چاہتی ہوں۔"</p>
+
+    <p class="dlg">"باتیں بھی ہوتی رہیں گی۔ تم پہلے میرے ہاتھ کا بنا ہوا کھانا کھاؤ۔"</p>
+
+    <p>وہ آنکھوں میں نمی لیے وہاں سے اٹھ گئی تھی۔</p>
+
+    <p class="dlg">"کبیر! میں آج یہ بتانے آئی ہوں کہ میں تم سے شادی نہیں کر سکتی۔"</p>
+
+    <p>وہ کب سے یہ دو جملے بولنے کے لیے ہمت اکٹھا کر رہی تھی۔ بالآخر وہ جس مقصد کے لیے آئی تھی وہ پورا ہو چکا تھا۔ وہ پیٹھ موڑے اپنے آنسو چھپائے اسے صاف الفاظ میں انکار کر چکی تھی — لیکن وہ جانے ہی لگی تھی جب اس نے اس کا بازو پکڑ لیا۔</p>
+
+    <p>سارے جسم کا خون دوڑ کر اس کی آنکھوں میں سمٹ آیا تھا۔ اس کے چہرے پر وہ طوفان تھا جو کسی کو بھی اپنی لپیٹ میں لے سکتا تھا۔</p>
+
+    <p class="dlg">"تم نے مجھ سے وعدہ کیا تھا کہ تم مجھ سے شادی کرنے کے لیے اپنے گھر والوں کو قائل کرو گی۔ تم میرے جذبات کے ساتھ نہیں کھیل سکتی۔" وہ غصے سے دانت پیستا ہوا اس کی آنکھوں میں آنکھیں ڈال کر بات کر رہا تھا۔</p>
+
+    <p class="dlg">"میں نے تم سے وعدہ نہیں کیا تھا۔ میں نے کہا تھا کہ میں کوشش کروں گی۔ لیکن اس سے پہلے کہ میں بابا جانی سے بات کرتی، وہ مجھے پہلے ہی اپنا فیصلہ سنا چکے تھے — وہ میری نسبت میرے خالہ زاد سے طے کر چکے ہیں۔"</p>
+
+    <p class="dlg">"میرے ہوتے ہوئے اگر تمہاری شادی کسی اور سے ہوئی تو میں اس دنیا کو آگ لگا دوں گا۔"</p>
+
+    <p>اس کے ارادے بھانپ کر اس نے آنکھیں بند کیے ایک گہرا سانس لیا۔</p>
+
+    <p class="dlg">"دیکھو! کبیر — جوڑے آسمان پر بنتے ہیں۔ ہمارے اختیار میں کچھ نہیں ہوتا۔ اگر تم مجھ سے واقعی سچی محبت کرتے ہو تو پھر تمہیں مجھے بھولنا ہوگا۔"</p>
+
+    <p class="dlg">"یہ کیا کہہ رہی ہو حریم؟ میں تمہارے بغیر جینے کا تصور بھی نہیں کر سکتا۔" آنسو ٹپ ٹپ اس کی آنکھوں سے نکل رہے تھے۔</p>
+
+    <p>اس کے آنسو دیکھ کر اس کا دل جل رہا تھا۔ اس نے اس کا ہاتھ اپنے سر پر رکھا۔</p>
+
+    <p class="dlg">"میری قسم کھاؤ کبیر — کہ تم میری شادی ہونے تک مجھ سے نہ ملو گے اور نہ ہی کوئی رابطہ رکھو گے۔ تم بھی کوئی اچھی سی لڑکی دیکھ کر شادی کر لو گے۔"</p>
+
+    <p class="dlg">"آج کے بعد تم مجھ سے کبھی نہیں ملو گے — نہ میرے کالج آؤ گے، نہ میرے گھر کے آس پاس نظر آؤ گے۔"</p>
+
+    <p>یہ کہتے ہی وہ لمحہ ضائع کیے بغیر وہاں سے چلی گئی تھی۔ کبیر اس کو جاتے ہوئے دیکھتا رہا۔ اس کے گیٹ سے باہر نکلتے ہی وہ زور سے چلایا تھا۔ اپنے ہاتھوں سے بنائے ہوئے کھانے کو اس نے زمین پر گرا دیا تھا۔</p>
+
+    <div class="scene">✦ ✦ ✦</div>
+
+    <p>گیٹ کے باہر حریم کی دوست اس کا انتظار کر رہی تھی۔ آنکھوں میں جو آنسو مقید تھے وہ گاڑی میں بیٹھتے ہی اس کے رخسار پر ڈھلک چکے تھے۔</p>
+
+    <p class="dlg">"سوہا! وہ مجھ سے اب کبھی نہیں ملے گا۔ سچ تو یہ ہے مجھے بھی اس سے محبت ہو چکی تھی۔ لیکن اب سب کچھ ختم ہو گیا ہے۔ میں اس کے بغیر کیسے رہوں گی؟"</p>
+
+    <p>وہ بلند آواز سے رو رہی تھی۔ اس نے بڑی آسانی سے کہا تھا کہ وہ بیس دن کی محبت کے لیے اپنے بیس سالوں کے رشتوں کو دھوکے میں نہیں رکھ سکتی۔</p>
+
+    <div class="scene">✦ ✦ ✦</div>
+
+    <p>یہ پہلی بار ہوا تھا کہ ایک پوری رات اور دن گزر جانے کے بعد بھی کوئی اس کو منانے نہیں آیا تھا۔ اس نے خود کو کمرے میں بند کرنے کا فیصلہ کر لیا تھا۔</p>
+
+    <p>حریم کا معصوم سفید رنگت چہرہ مسلسل رونے کی وجہ سے سرخی مائل نظر آ رہا تھا۔ اس کی آنکھیں سوجی ہوئی تھیں۔ تین بھائیوں کی اکلوتی بہن نے آج خود کو کمرے میں بند کیا ہوا تھا — اس کی اداسی کا اثر پورے گھر پر بھی تھا۔</p>
+
+    <p>صبح کے وقت ناشتے کی میز پر حریم کے بابا جان، احمر اور اسد بیٹھے ہوئے تھے۔ کوئی بھی صحیح طریقے سے ناشتہ نہیں کر رہا تھا۔</p>
+
+    <p class="dlg">"باباجان! آپ حریم کی بات مان کیوں نہیں لیتے؟" احمر نے مؤدبانہ انداز میں کہا۔</p>
+
+    <p class="dlg">"احمر! بڑے بھائی کی حیثیت سے تمہارا فرض ہے کہ تم حریم کو سمجھاؤ۔ الٹا تم اس کی وکالت کر رہے ہو۔ میں نے اس کی آج تک ہر ضد پوری کی ہے لیکن اس بار ہرگز نہیں۔"</p>
+
+    <div class="scene">✦ ✦ ✦</div>
+
+    <p>دروازے سے بلال کو کپڑوں کا بیگ کندھے پر ڈالے آتے دیکھا گیا۔</p>
+
+    <p class="dlg">"السلام علیکم! کیا ہوا سب کے منہ کیوں لٹکے ہوئے ہیں؟"</p>
+
+    <p class="dlg">"حریم نے خود کو کمرے میں بند کیا ہوا ہے۔"</p>
+
+    <p>بلال نے اپنے باباجان کو اعتماد میں لیا اور اس کے قائل کرنے پر وہ رضامند بھی ہو گئے۔</p>
+
+    <p class="dlg">"اچھا۔ پیار جتانا بس کرو۔ حریم سے جا کر کہو کہ وہ ٹور کی تیاری کرے۔"</p>
+
+    <p>بلال نے دروازہ کھٹکھٹایا۔</p>
+
+    <p class="dlg">"دروازہ کھولو حریم! میں تم سے وعدہ کرتا ہوں کہ ہاسٹل واپس تب تک نہیں جاؤں گا جب تک تمہیں اجازت نہ دلوا دوں۔"</p>
+
+    <p>اس کی بات سنتے ہی حریم نے دروازہ کھولا کیونکہ وہ اچھی طرح جانتی تھی کہ بلال نے کبھی وعدہ خلافی نہیں کی۔</p>
+
+    <p class="dlg">"یہ کیا حال بنایا ہوا ہے حریم؟ یہ آنکھوں کے گرد سیاہ حلقے، یہ سوجی ہوئی آنکھیں!"</p>
+
+    <p>حریم بلال کے سینے سے لگ گئی اور زار وقطار رونے لگی۔</p>
+
+    <p class="dlg">"بھائی! کوئی مجھ سے پیار نہیں کرتا۔"</p>
+
+    <p>بلال نے اس کے سر پر شفقت بھرا ہاتھ رکھا اور اسے یقین دلایا کہ سب اس سے کتنا پیار کرتے ہیں۔</p>
+
+    <div class="scene">✦ ✦ ✦</div>
+
+    <p class="dlg">"بیٹا! میں جانتا ہوں کہ تم ہم سب سے کتنی محبت کرتی ہو۔ لیکن ایک چیز دھیان میں رکھنا کہ یہ دنیا بہت خوفناک ہے — تم اس وقت اپنے گھر میں محفوظ ہو۔"</p>
+
+    <p class="dlg">"بیٹا! پھر تو وہاں بہت سردی ہو گی۔ تم ایسا کرو کل ہی بلال کے ساتھ جا کر کچھ گرم کپڑے خرید لاؤ۔" انہوں نے مسکراتے ہوئے کہا۔</p>
+
+    <p>یہ الفاظ سن کر حریم تو جیسے ہواؤں میں اڑنے لگی۔ مرجھایا ہوا پھول پھر سے کھل اٹھا۔ یکدم وہ ان کے سینے سے لپٹ گئی — وہ نہیں جانتی تھی کہ اسے اس ضد کی کتنی بڑی قیمت چکانا پڑے گی، اور ایک بڑی مصیبت اس کا تعاقب کر رہی تھی۔</p>
+
+    <div class="scene">🌹 — جاری ہے — 🌹</div>
+
+  </div>
+  <div class="page-num">1</div>
+</div>
+</div>
+
+<!-- BOTTOM 3-BUTTON NAV -->
+<div class="bottom-nav">
+  <a class="nav-btn nav-prev disabled" href="#">← پچھلی</a>
+  <a class="nav-btn nav-home" href="episodes.html">🌹 اقساط</a>
+  <a class="nav-btn nav-next" href="episode2.html">اگلی →</a>
+</div>
+
+<script>
+let fs=parseFloat(getComputedStyle(document.getElementById('prose')).fontSize);
+function cf(d){fs=Math.min(Math.max(fs+d*1.5,14),24);document.getElementById('prose').style.fontSize=fs+'px'}
+</script>
+</body>
+</html>

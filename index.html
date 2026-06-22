@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
-<html lang="ur" dir="rtl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ناول: باغِ وفا</title>
+    <title>Novel: Baag-e-Wafaa</title>
     <style>
         :root {
             --bg-color: #ffffff;
@@ -23,31 +23,31 @@
         }
 
         body {
-            font-family: 'Noto Nastaliq Urdu', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             margin: 0;
             padding: 0;
             transition: background-color 0.3s, color 0.3s;
+            text-align: center;
         }
 
         header {
             background-color: var(--card-bg);
             padding: 20px;
-            text-align: center;
             border-bottom: 2px solid var(--accent-color);
             position: relative;
         }
 
         h1 {
-            margin: 0;
+            margin: 10px 0 0 0;
             color: var(--accent-color);
         }
 
         .theme-toggle {
             position: absolute;
             top: 20px;
-            left: 20px;
+            right: 20px;
             background-color: var(--accent-color);
             color: var(--btn-text);
             border: none;
@@ -59,9 +59,17 @@
 
         .container {
             max-width: 600px;
-            margin: 40px auto;
+            margin: 30px auto;
             padding: 20px;
-            text-align: center;
+        }
+
+        /* Cover Page Image Style */
+        .cover-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            margin-bottom: 25px;
         }
 
         .intro-box {
@@ -70,13 +78,15 @@
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             margin-bottom: 30px;
-            line-height: 2;
+            line-height: 1.6;
+            text-align: justify;
         }
 
-        /* ڈراپ ڈاؤن اسٹائل */
+        /* Dropdown Style */
         .dropdown {
             position: relative;
             display: inline-block;
+            margin-bottom: 50px;
         }
 
         .dropbtn {
@@ -96,12 +106,12 @@
             display: none;
             position: absolute;
             background-color: var(--card-bg);
-            min-width: 200px;
+            min-width: 250px;
             box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
             border-radius: 8px;
             z-index: 1;
-            right: 50%;
-            transform: translateX(50%);
+            left: 50%;
+            transform: translateX(-50%);
             margin-top: 10px;
             overflow: hidden;
         }
@@ -114,6 +124,7 @@
             font-weight: bold;
             border-bottom: 1px solid rgba(0,0,0,0.05);
             transition: background 0.2s;
+            text-align: center;
         }
 
         .dropdown-content a:hover {
@@ -135,31 +146,33 @@
 <body>
 
     <header>
-        <button class="theme-toggle" id="themeToggle">تھیم بدلیں</button>
-        <h1>ناول: باغِ وفا</h1>
-        <p>مصنفہ: سحرش گلزار</p>
+        <button class="theme-toggle" id="themeToggle">Change Theme</button>
+        <h1>Novel: Baag-e-Wafaa</h1>
+        <p>Writer: Sehrish Gulzar</p>
     </header>
 
     <div class="container">
+        <img src="cover.jpg" alt="Baag-e-Wafaa Cover" class="cover-image">
+
         <div class="intro-box">
-            <h3>تعارف:</h3>
-            <p>ناول "باغِ وفا" ایک ایسی لڑکی کی کہانی ہے جو اپنے والدین کی عزت اور مان رکھنے کے لیے اپنی خوشیوں اور خوابوں کی قربانی دے دیتی ہے۔ لیکن تقدیر کے فیصلے کون جان سکتا ہے؟ کیا سچی دعا انسان کے نصیب کو بدل سکتی ہے؟ سسپنس، رومانس اور جذبات سے بھرپور ایک بہترین تحریر۔</p>
+            <h3 style="text-align: center; color: var(--accent-color);">Introduction:</h3>
+            <p style="direction: rtl; font-family: 'Noto Nastaliq Urdu', sans-serif;">ناول "باغِ وفا" ایک ایسی لڑکی کی کہانی ہے جو اپنے والدین کی عزت اور مان رکھنے کے لیے اپنی خوشیوں اور خوابوں کی قربانی دے دیتی ہے۔ لیکن تقدیر کے فیصلے کون جان سکتا ہے؟ کیا سچی دعا انسان کے نصیب کو بدل سکتی ہے؟ سسپنس، رومانس اور جذبات سے بھرپور ایک بہترین تحریر۔</p>
         </div>
 
         <div class="dropdown">
-            <button onclick="toggleDropdown()" class="dropbtn">ناول کی اقساط پڑھیں 🔽</button>
+            <button onclick="toggleDropdown()" class="dropbtn">Read Episodes 🔽</button>
             <div id="myDropdown" class="dropdown-content">
-                <a href="episode2.html">قسط نمبر 1 (ویب پیج)</a>
-                <a href="episode%202.pdf" target="_blank">قسط نمبر 2 (PDF)</a>
-                <a href="episode%203.pdf" target="_blank">قسط نمبر 3 (PDF)</a>
-                <a href="episode%204.pdf" target="_blank">قسط نمبر 4 (PDF)</a>
-                <a href="episode%205.pdf" target="_blank">قسط نمبر 5 (PDF)</a>
+                <a href="episode2.html">Episode 1 (Web Page)</a>
+                <a href="episode%202.pdf" target="_blank">Episode 2 (PDF)</a>
+                <a href="episode%203.pdf" target="_blank">Episode 3 (PDF)</a>
+                <a href="episode%204.pdf" target="_blank">Episode 4 (PDF)</a>
+                <a href="episode%205.pdf" target="_blank">Episode 5 (PDF)</a>
             </div>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2026 ناول باغِ وفا۔ جملہ حقوق محفوظ ہیں۔</p>
+        <p>&copy; 2026 Novel Baag-e-Wafaa. All Rights Reserved.</p>
     </footer>
 
     <script>

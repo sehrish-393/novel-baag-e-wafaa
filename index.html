@@ -58,41 +58,70 @@
         }
 
         .container {
-            max-width: 800px;
-            margin: 30px auto;
+            max-width: 600px;
+            margin: 40px auto;
             padding: 20px;
+            text-align: center;
         }
 
         .intro-box {
             background-color: var(--card-bg);
-            padding: 20px;
+            padding: 25px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             margin-bottom: 30px;
-            line-height: 1.8;
+            line-height: 2;
         }
 
-        .episode-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 15px;
+        /* ڈراپ ڈاؤن اسٹائل */
+        .dropdown {
+            position: relative;
+            display: inline-block;
         }
 
-        .episode-btn {
+        .dropbtn {
             background-color: var(--accent-color);
             color: var(--btn-text);
-            text-align: center;
-            padding: 15px;
-            text-decoration: none;
-            border-radius: 5px;
+            padding: 15px 40px;
+            font-size: 1.1em;
             font-weight: bold;
-            transition: transform 0.2s, opacity 0.2s;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(140, 28, 28, 0.3);
+            transition: background-color 0.3s;
         }
 
-        .episode-btn:hover {
-            transform: translateY(-3px);
-            opacity: 0.9;
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--card-bg);
+            min-width: 200px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            border-radius: 8px;
+            z-index: 1;
+            right: 50%;
+            transform: translateX(50%);
+            margin-top: 10px;
+            overflow: hidden;
         }
+
+        .dropdown-content a {
+            color: var(--text-color);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            transition: background 0.2s;
+        }
+
+        .dropdown-content a:hover {
+            background-color: var(--accent-color);
+            color: var(--btn-text);
+        }
+
+        .show { display: block; }
 
         footer {
             text-align: center;
@@ -117,13 +146,15 @@
             <p>ناول "باغِ وفا" ایک ایسی لڑکی کی کہانی ہے جو اپنے والدین کی عزت اور مان رکھنے کے لیے اپنی خوشیوں اور خوابوں کی قربانی دے دیتی ہے۔ لیکن تقدیر کے فیصلے کون جان سکتا ہے؟ کیا سچی دعا انسان کے نصیب کو بدل سکتی ہے؟ سسپنس، رومانس اور جذبات سے بھرپور ایک بہترین تحریر۔</p>
         </div>
 
-        <h3>تمام اقساط (PDF ڈاؤن لوڈ/پڑھیں):</h3>
-        <div class="episode-list">
-            <a href="episode%201.pdf" target="_blank" class="episode-btn">قسط نمبر 1</a>
-            <a href="episode%202.pdf" target="_blank" class="episode-btn">قسط نمبر 2</a>
-            <a href="episode%203.pdf" target="_blank" class="episode-btn">قسط نمبر 3</a>
-            <a href="episode%204.pdf" target="_blank" class="episode-btn">قسط نمبر 4</a>
-            <a href="episode%205.pdf" target="_blank" class="episode-btn">قسط نمبر 5</a>
+        <div class="dropdown">
+            <button onclick="toggleDropdown()" class="dropbtn">ناول کی اقساط پڑھیں 🔽</button>
+            <div id="myDropdown" class="dropdown-content">
+                <a href="episode2.html">قسط نمبر 1 (ویب پیج)</a>
+                <a href="episode%202.pdf" target="_blank">قسط نمبر 2 (PDF)</a>
+                <a href="episode%203.pdf" target="_blank">قسط نمبر 3 (PDF)</a>
+                <a href="episode%204.pdf" target="_blank">قسط نمبر 4 (PDF)</a>
+                <a href="episode%205.pdf" target="_blank">قسط نمبر 5 (PDF)</a>
+            </div>
         </div>
     </div>
 
@@ -132,6 +163,22 @@
     </footer>
 
     <script>
+        function toggleDropdown() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+
         const themeToggle = document.getElementById('themeToggle');
         const currentTheme = localStorage.getItem('theme') || 'light';
 

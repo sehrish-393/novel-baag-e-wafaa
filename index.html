@@ -123,6 +123,47 @@ font-size:18px;
 }
 }
 </style>
+  .nav-buttons{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-top:40px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  padding:12px 20px;
+  border-radius:10px;
+  text-decoration:none;
+  font-weight:bold;
+  transition:0.3s;
+  display:inline-block;
+}
+
+/* Previous */
+.prev{
+  background:#1b4332;
+  color:#fff;
+}
+
+/* Download */
+.download{
+  background:#c9a227;
+  color:#000;
+}
+
+/* Next */
+.next{
+  background:#0f3d2e;
+  color:#fff;
+}
+
+/* Hover */
+.btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 8px 20px rgba(0,0,0,0.2);
+}
 </head>
 
 <body>
@@ -150,24 +191,15 @@ font-size:18px;
 📖 Read Episode 1 Online
 </a>
 
-<a href="episode 1.pdf" download class="btn download">
-⬇ Episode 1 PDF
-</a>
+<div class="nav-buttons">
 
-<a href="episode 2.pdf" target="_blank" class="btn read">
-📖 Episode 2
-</a>
+  <a href="episode 1.html" class="btn prev">← Previous Episode</a>
 
-<a href="episode 2.pdf" download class="btn download">
-⬇ Episode 2 PDF
-</a>
-  <a href="episode 3.pdf" target="_blank" class="btn read">
-📖 Episode 3
-</a>
+  <a href="episode 1.pdf" class="btn download">⬇ Download PDF</a>
 
-<a href="episode 3.pdf" download class="btn download">
-⬇ Episode 3 PDF
-</a>
+  <a href="episode 2.html" class="btn next">Next Episode →</a>
+
+</div>
 
 </div>
 <a href="episode 4.pdf" target="_blank" class="btn read">

@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: 'Noto Nastaliq Urdu', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f5f5f5;
+            background-color: #f8f9fa;
             margin: 0;
             padding: 20px;
             display: flex;
@@ -17,12 +17,12 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 600px;
             width: 100%;
             background: #ffffff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
             text-align: center;
             box-sizing: border-box;
         }
@@ -30,30 +30,30 @@
         h1 {
             color: #800020;
             margin-bottom: 5px;
-            font-size: 2.5rem;
+            font-size: 2.2rem;
         }
 
         .author {
-            font-size: 1.2rem;
-            color: #555;
-            margin-bottom: 25px;
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 20px;
             font-weight: bold;
         }
 
         .cover-image {
             max-width: 100%;
             height: auto;
-            width: 300px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-            margin-bottom: 30px;
+            width: 280px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            margin-bottom: 25px;
         }
 
         .intro-box {
             background-color: #fdfbf7;
             border-right: 5px solid #800020;
-            padding: 20px;
-            margin-bottom: 35px;
+            padding: 15px;
+            margin-bottom: 25px;
             border-radius: 4px;
             text-align: right;
             direction: rtl;
@@ -61,52 +61,77 @@
 
         .intro-title {
             font-weight: bold;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             color: #800020;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .intro-text {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             line-height: 1.8;
             color: #444;
         }
 
-        .episode-list {
+        /* Dropdown Button Styling */
+        .dropdown-btn {
+            width: 100%;
+            padding: 15px;
+            background: #800020;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(128, 0, 32, 0.2);
+            transition: background 0.3s ease;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
+        }
+
+        .dropdown-btn:hover {
+            background: #600018;
+        }
+
+        /* Episodes List (Hidden by default) */
+        .episode-list {
+            display: none;
+            flex-direction: column;
+            gap: 10px;
             padding: 0;
+            margin-top: 15px;
             list-style: none;
             width: 100%;
         }
 
+        /* Show class to toggle visibility */
+        .episode-list.show {
+            display: flex;
+        }
+
         .episode-list li {
             width: 100%;
-            max-width: 500px;
         }
 
         .btn {
             display: block;
-            padding: 15px 20px;
-            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            padding: 12px;
+            background: #ffffff;
             color: #800020;
             text-decoration: none;
-            border-radius: 8px;
+            border-radius: 6px;
             font-weight: bold;
-            font-size: 1.2rem;
-            border: 1px solid #dcdcdc;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            border: 1px solid #e0e0e0;
+            transition: all 0.2s ease;
             text-align: center;
         }
 
         .btn:hover {
-            background: #800020;
-            color: #ffffff;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            background: #fdf2f4;
+            border-color: #800020;
         }
     </style>
 </head>
@@ -119,16 +144,21 @@
         <!-- Title Cover Image -->
         <img src="baag-e-wafaa-cover.png" alt="Baag-e-Wafaa Cover" class="cover-image">
 
-        <!-- Introduction Section -->
+        <!-- Corrected Introduction Section -->
         <div class="intro-box">
             <div class="intro-title">تعارف:</div>
             <div class="intro-text">
-                باغِ وفا یہ رومان، تو ببیباقہ باغ کہہا؛و حاسام سنے کی گاٹہی گزار،، ہا بیفنج خریتکہ ، اٹ بگڑا پلے رامہ ٹمون ناول کا رچہ تیارہ تارب کے دمتہ یوگی وجور نئیٹی گوچن کے سییوں نے جعلالیا ام کوڈڈ آہسٹ میں آی اپ کوجو باغ کپ دوڈتا ہیں۔
+                یہ کہانی ہے محبت، قربانی اور رشتوں کے تقدس کی۔ زندگی کے اتار چڑھاؤ اور قسمت کے فیصلوں کے گرد گھومتا ایک خوبصورت رومانوی ناول، جو آپ کے دل کو چھو جائے گا۔
             </div>
         </div>
 
-        <!-- Downstair Vertical Buttons List -->
-        <ul class="episode-list">
+        <!-- Single Dropdown Button -->
+        <button class="dropdown-btn" onclick="toggleEpisodes()">
+            تمام اقساط دیکھیں <span>▼</span>
+        </button>
+
+        <!-- Downstair Episodes (Hidden Inside Button) -->
+        <ul class="episode-list" id="episodesMenu">
             <li><a href="episode 1.pdf" class="btn">قسط نمبر 1</a></li>
             <li><a href="episode 2.pdf" class="btn">قسط نمبر 2</a></li>
             <li><a href="episode 3.pdf" class="btn">قسط نمبر 3</a></li>
@@ -138,6 +168,14 @@
             <li><a href="episode7.pdf" class="btn">قسط نمبر 7</a></li>
         </ul>
     </div>
+
+    <script>
+        // Function to open/close the episodes list
+        function toggleEpisodes() {
+            var list = document.getElementById("episodesMenu");
+            list.classList.toggle("show");
+        }
+    </script>
 
 </body>
 </html>

@@ -1,191 +1,143 @@
 <!DOCTYPE html>
-<html lang="ur" dir="rtl">
+<html lang="ur">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Novel: Baag-e-Wafaa</title>
     <style>
-        :root {
-            --bg-color: #ffffff;
-            --text-color: #333333;
-            --card-bg: #f9f9f9;
-            --accent-color: #8c1c1c;
-            --btn-text: #ffffff;
-        }
-
-        [data-theme="dark"] {
-            --bg-color: #121212;
-            --text-color: #e0e0e0;
-            --card-bg: #1e1e1e;
-            --accent-color: #ff6b6b;
-            --btn-text: #121212;
-        }
-
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            font-family: 'Noto Nastaliq Urdu', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
             margin: 0;
-            padding: 0;
-            transition: background-color 0.3s, color 0.3s;
-            text-align: center;
-        }
-
-        header {
-            background-color: var(--card-bg);
             padding: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        h1 {
-            margin: 0;
-            color: var(--accent-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #333;
         }
 
         .container {
             max-width: 800px;
-            margin: 20px auto;
-            padding: 0 15px;
+            width: 100%;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            text-align: center;
             box-sizing: border-box;
         }
 
-        .novel-description {
-            background-color: var(--card-bg);
-            padding: 20px;
+        h1 {
+            color: #800020;
+            margin-bottom: 5px;
+            font-size: 2.5rem;
+        }
+
+        .author {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+
+        .cover-image {
+            max-width: 100%;
+            height: auto;
+            width: 300px;
             border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
             margin-bottom: 30px;
+        }
+
+        .intro-box {
+            background-color: #fdfbf7;
+            border-right: 5px solid #800020;
+            padding: 20px;
+            margin-bottom: 35px;
+            border-radius: 4px;
             text-align: right;
+            direction: rtl;
+        }
+
+        .intro-title {
+            font-weight: bold;
+            font-size: 1.3rem;
+            color: #800020;
+            margin-bottom: 10px;
+        }
+
+        .intro-text {
+            font-size: 1.1rem;
             line-height: 1.8;
+            color: #444;
         }
 
         .episode-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             gap: 15px;
             padding: 0;
             list-style: none;
+            width: 100%;
         }
 
-        .episode-card {
-            background-color: var(--card-bg);
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            transition: transform 0.2s;
+        .episode-list li {
+            width: 100%;
+            max-width: 500px;
         }
 
-        .episode-card:hover {
-            transform: translateY(-3px);
-        }
-
-        .ep-link {
-            display: inline-block;
-            background-color: var(--accent-color);
-            color: var(--btn-text);
+        .btn {
+            display: block;
+            padding: 15px 20px;
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            color: #800020;
             text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 5px;
+            border-radius: 8px;
             font-weight: bold;
-            margin-top: 10px;
-            transition: background-color 0.2s;
+            font-size: 1.2rem;
+            border: 1px solid #dcdcdc;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            text-align: center;
         }
 
-        .ep-link:hover {
-            opacity: 0.9;
-        }
-
-        .theme-toggle {
-            background: none;
-            border: 2px solid var(--accent-color);
-            color: var(--accent-color);
-            padding: 8px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: bold;
-            margin-top: 15px;
-        }
-
-        /* موبائل اسکرین ریسپونسیو سیٹنگز */
-        @media (max-width: 600px) {
-            body {
-                font-size: 15px;
-            }
-            .container {
-                padding: 0 10px;
-            }
-            .novel-description {
-                padding: 15px;
-                line-height: 1.6;
-            }
-            .episode-list {
-                grid-template-columns: 1fr;
-            }
+        .btn:hover {
+            background: #800020;
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>ناول: باغِ وفا</h1>
-        <p>مصنفہ: سحرش گلزار</p>
-        <button class="theme-toggle" id="themeToggle">ڈارک موڈ</button>
-    </header>
-
     <div class="container">
-        <div class="novel-description">
-            <h3>تعارف:</h3>
-            <p>کبھی کبھی محبت ملنے کا نام نہیں ہوتی... بلکہ خاموشی، قربانی اور دعا کا دوسرا نام ہوتی ہے۔ حریم نے اپنے والدین کی خوشی کے لیے اپنی خواہشات قربان کر دیں... اور پھر قسمت نے اس کی زندگی میں کبیر کو اس انداز میں شامل کیا، جس کا اس نے کبھی تصور بھی نہیں کیا تھا۔ کیا محبت ہمیشہ آسان ہوتی ہے؟ یا اصل محبت آزمائشوں سے گزر کر ہی اپنی منزل تک پہنچتی ہے؟</p>
+        <h1>ناول: باغِ وفا</h1>
+        <div class="author">مصنفہ: سحرش گلزار</div>
+
+        <!-- Title Cover Image -->
+        <img src="baag-e-wafaa-cover.png" alt="Baag-e-Wafaa Cover" class="cover-image">
+
+        <!-- Introduction Section -->
+        <div class="intro-box">
+            <div class="intro-title">تعارف:</div>
+            <div class="intro-text">
+                باغِ وفا یہ رومان، تو ببیباقہ باغ کہہا؛و حاسام سنے کی گاٹہی گزار،، ہا بیفنج خریتکہ ، اٹ بگڑا پلے رامہ ٹمون ناول کا رچہ تیارہ تارب کے دمتہ یوگی وجور نئیٹی گوچن کے سییوں نے جعلالیا ام کوڈڈ آہسٹ میں آی اپ کوجو باغ کپ دوڈتا ہیں۔
+            </div>
         </div>
 
-        <h2>تمام اقساط (Episodes)</h2>
+        <!-- Downstair Vertical Buttons List -->
         <ul class="episode-list">
-            <li class="episode-card">
-                <h3>قسط نمبر 1</h3>
-                <a href="#" class="ep-link">پڑھیے (PDF)</a>
-            </li>
-            <li class="episode-card">
-                <h3>قسط نمبر 2</h3>
-                <a href="#" class="ep-link">پڑھیے (PDF)</a>
-            </li>
-            <li class="episode-card">
-                <h3>قسط نمبر 3</h3>
-                <a href="#" class="ep-link">پڑھیے (PDF)</a>
-            </li>
-            <li class="episode-card">
-                <h3>قسط نمبر 4</h3>
-                <a href="#" class="ep-link">پڑھیے (PDF)</a>
-            </li>
-            <li class="episode-card">
-                <h3>قسط نمبر 5</h3>
-                <a href="#" class="ep-link">پڑھیے (PDF)</a>
-            </li>
-            <li class="episode-card">
-                <h3>قسط نمبر 6</h3>
-                <a href="#" class="ep-link">پڑھیے (PDF)</a>
-            </li>
-            
-            <!-- قسط نمبر 7 -->
-            <li class="episode-card">
-                <h3>قسط نمبر 7</h3>
-                <!-- یہاں آپ کی اپلوڈ کردہ فائل کا لنک پہلے سے لگا دیا ہے -->
-                <a href="https://sehrish-393.github.io/novel-baag-e-wafaa/episode7.pdf" class="ep-link">پڑھیے (PDF)</a>
-            </li>
+            <li><a href="episode 1.pdf" class="btn">قسط نمبر 1</a></li>
+            <li><a href="episode 2.pdf" class="btn">قسط نمبر 2</a></li>
+            <li><a href="episode 3.pdf" class="btn">قسط نمبر 3</a></li>
+            <li><a href="episode 4.pdf" class="btn">قسط نمبر 4</a></li>
+            <li><a href="episode 5.pdf" class="btn">قسط نمبر 5</a></li>
+            <li><a href="episode 6.pdf" class="btn">قسط نمبر 6</a></li>
+            <li><a href="episode7.pdf" class="btn">قسط نمبر 7</a></li>
         </ul>
     </div>
-
-    <script>
-        const toggleBtn = document.getElementById('themeToggle');
-        toggleBtn.addEventListener('click', () => {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            if (currentTheme === 'dark') {
-                document.documentElement.removeAttribute('data-theme');
-                toggleBtn.textContent = 'ڈارک موڈ';
-            } else {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                toggleBtn.textContent = 'لائٹ موڈ';
-            }
-        });
-    </script>
 
 </body>
 </html>

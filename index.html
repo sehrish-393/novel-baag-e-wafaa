@@ -1,6 +1,5 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ur" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,181 +34,158 @@
         header {
             background-color: var(--card-bg);
             padding: 20px;
-            border-bottom: 2px solid var(--accent-color);
-            position: relative;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
         h1 {
-            margin: 10px 0 0 0;
+            margin: 0;
             color: var(--accent-color);
         }
 
-        .theme-toggle {
-            position: absolute;
-            top: 20px;
-            right: 20px;
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 15px;
+            box-sizing: border-box;
+        }
+
+        .novel-description {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            text-align: right;
+            line-height: 1.8;
+        }
+
+        .episode-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            padding: 0;
+            list-style: none;
+        }
+
+        .episode-card {
+            background-color: var(--card-bg);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+
+        .episode-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .ep-link {
+            display: inline-block;
             background-color: var(--accent-color);
             color: var(--btn-text);
-            border: none;
-            padding: 10px 15px;
-            cursor: pointer;
+            text-decoration: none;
+            padding: 10px 20px;
             border-radius: 5px;
             font-weight: bold;
-        }
-
-        .container {
-            max-width: 600px;
-            margin: 30px auto;
-            padding: 20px;
-        }
-
-        /* Cover Page Image Style */
-        .cover-image {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-            margin-bottom: 25px;
-        }
-
-        .intro-box {
-            background-color: var(--card-bg);
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-            line-height: 1.6;
-            text-align: justify;
-        }
-
-        /* Dropdown Style */
-        .dropdown {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 50px;
-        }
-
-        .dropbtn {
-            background-color: var(--accent-color);
-            color: var(--btn-text);
-            padding: 15px 40px;
-            font-size: 1.1em;
-            font-weight: bold;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(140, 28, 28, 0.3);
-            transition: background-color 0.3s;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: var(--card-bg);
-            min-width: 250px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            border-radius: 8px;
-            z-index: 1;
-            left: 50%;
-            transform: translateX(-50%);
             margin-top: 10px;
-            overflow: hidden;
+            transition: background-color 0.2s;
         }
 
-        .dropdown-content a {
-            color: var(--text-color);
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
+        .ep-link:hover {
+            opacity: 0.9;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
             font-weight: bold;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            transition: background 0.2s;
-            text-align: center;
+            margin-top: 15px;
         }
 
-        .dropdown-content a:hover {
-            background-color: var(--accent-color);
-            color: var(--btn-text);
-        }
-
-        .show { display: block; }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            margin-top: 50px;
-            font-size: 0.9em;
-            background-color: var(--card-bg);
+        /* موبائل اسکرین ریسپونسیو سیٹنگز */
+        @media (max-width: 600px) {
+            body {
+                font-size: 15px;
+            }
+            .container {
+                padding: 0 10px;
+            }
+            .novel-description {
+                padding: 15px;
+                line-height: 1.6;
+            }
+            .episode-list {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <button class="theme-toggle" id="themeToggle">Change Theme</button>
-        <h1>Novel: Baag-e-Wafaa</h1>
-        <p>Writer: Sehrish Gulzar</p>
+        <h1>ناول: باغِ وفا</h1>
+        <p>مصنفہ: سحرش گلزار</p>
+        <button class="theme-toggle" id="themeToggle">ڈارک موڈ</button>
     </header>
 
     <div class="container">
-        <img src="baag-e-wafaa-cover.png" alt="Baag-e-Wafaa Cover" class="cover-image">
-
-        <div class="intro-box">
-            <h3 style="text-align: center; color: var(--accent-color);">Introduction:</h3>
-            <p style="direction: rtl; font-family: 'Noto Nastaliq Urdu', sans-serif;">ناول "باغِ وفا" ایک ایسی لڑکی کی کہانی ہے جو اپنے والدین کی عزت اور مان رکھنے کے لیے اپنی خوشیوں اور خوابوں کی قربانی دے دیتی ہے۔ لیکن تقدیر کے فیصلے کون جان سکتا ہے؟ کیا سچی دعا انسان کے نصیب کو بدل سکتی ہے؟ سسپنس، رومانس اور جذبات سے بھرپور ایک بہترین تحریر۔</p>
+        <div class="novel-description">
+            <h3>تعارف:</h3>
+            <p>کبھی کبھی محبت ملنے کا نام نہیں ہوتی... بلکہ خاموشی، قربانی اور دعا کا دوسرا نام ہوتی ہے۔ حریم نے اپنے والدین کی خوشی کے لیے اپنی خواہشات قربان کر دیں... اور پھر قسمت نے اس کی زندگی میں کبیر کو اس انداز میں شامل کیا، جس کا اس نے کبھی تصور بھی نہیں کیا تھا۔ کیا محبت ہمیشہ آسان ہوتی ہے؟ یا اصل محبت آزمائشوں سے گزر کر ہی اپنی منزل تک پہنچتی ہے؟</p>
         </div>
 
-        <div class="dropdown">
-            <button onclick="toggleDropdown()" class="dropbtn">Read Episodes 🔽</button>
-            <div id="myDropdown" class="dropdown-content">
-                <a href="episode%201.pdf" target="_blank">Episode 1 (PDF)</a>
-                <a href="episode%202.pdf" target="_blank">Episode 2 (PDF)</a>
-                <a href="episode%203.pdf" target="_blank">Episode 3 (PDF)</a>
-                <a href="episode%204.pdf" target="_blank">Episode 4 (PDF)</a>
-                <a href="episode%205.pdf" target="_blank">Episode 5 (PDF)</a>
-              <a href="episode 6.pdf" target="_blank">Episode 6 (PDF)</a>
-            </div>
-        </div>
+        <h2>تمام اقساط (Episodes)</h2>
+        <ul class="episode-list">
+            <li class="episode-card">
+                <h3>قسط نمبر 1</h3>
+                <a href="#" class="ep-link">پڑھیے (PDF)</a>
+            </li>
+            <li class="episode-card">
+                <h3>قسط نمبر 2</h3>
+                <a href="#" class="ep-link">پڑھیے (PDF)</a>
+            </li>
+            <li class="episode-card">
+                <h3>قسط نمبر 3</h3>
+                <a href="#" class="ep-link">پڑھیے (PDF)</a>
+            </li>
+            <li class="episode-card">
+                <h3>قسط نمبر 4</h3>
+                <a href="#" class="ep-link">پڑھیے (PDF)</a>
+            </li>
+            <li class="episode-card">
+                <h3>قسط نمبر 5</h3>
+                <a href="#" class="ep-link">پڑھیے (PDF)</a>
+            </li>
+            <li class="episode-card">
+                <h3>قسط نمبر 6</h3>
+                <a href="#" class="ep-link">پڑھیے (PDF)</a>
+            </li>
+            
+            <!-- قسط نمبر 7 -->
+            <li class="episode-card">
+                <h3>قسط نمبر 7</h3>
+                <!-- یہاں آپ کی اپلوڈ کردہ فائل کا لنک پہلے سے لگا دیا ہے -->
+                <a href="https://sehrish-393.github.io/novel-baag-e-wafaa/episode7.pdf" class="ep-link">پڑھیے (PDF)</a>
+            </li>
+        </ul>
     </div>
 
-    <footer>
-        <p>&copy; 2026 Novel Baag-e-Wafaa. All Rights Reserved.</p>
-    </footer>
-
     <script>
-        function toggleDropdown() {
-            document.getElementById("myDropdown").classList.toggle("show");
-        }
-
-        window.onclick = function(event) {
-            if (!event.target.matches('.dropbtn')) {
-                var dropdowns = document.getElementsByClassName("dropdown-content");
-                for (var i = 0; i < dropdowns.length; i++) {
-                    var openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('show')) {
-                        openDropdown.classList.remove('show');
-                    }
-                }
-            }
-        }
-
-        const themeToggle = document.getElementById('themeToggle');
-        const currentTheme = localStorage.getItem('theme') || 'light';
-
-        if (currentTheme === 'dark') {
-            document.documentElement.setAttribute('data-theme', 'dark');
-        }
-
-        themeToggle.addEventListener('click', () => {
-            let theme = document.documentElement.getAttribute('data-theme');
-            if (theme === 'dark') {
+        const toggleBtn = document.getElementById('themeToggle');
+        toggleBtn.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
                 document.documentElement.removeAttribute('data-theme');
-                localStorage.setItem('theme', 'light');
+                toggleBtn.textContent = 'ڈارک موڈ';
             } else {
                 document.documentElement.setAttribute('data-theme', 'dark');
-                localStorage.setItem('theme', 'dark');
+                toggleBtn.textContent = 'لائٹ موڈ';
             }
         });
     </script>
+
 </body>
 </html>
